@@ -1,2 +1,2 @@
 # Knight Anvil
-## A Java Chess Program developed using JavaFX.
+A Java Chess Program developed using JavaFX.
