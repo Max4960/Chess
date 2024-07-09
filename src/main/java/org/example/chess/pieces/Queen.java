@@ -31,4 +31,9 @@ public class Queen extends Piece {
     public Image getImage() {
         return image;
     }
+
+    public int[] getValidMoves() {
+        return null;
+    }
+
 }

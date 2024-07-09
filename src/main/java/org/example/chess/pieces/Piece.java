@@ -7,4 +7,8 @@ public abstract class Piece {
     protected int row, col;
 
     public abstract Image getImage();
+
+    public abstract int[] getValidMoves();
+
+
 }

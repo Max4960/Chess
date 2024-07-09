@@ -103,8 +103,23 @@ public class Game extends Application {
         }
     }
 
+    private boolean checkValidMove(int pos) {
+        int[] moves = currentPiece.getValidMoves();
+        int currentPosition = currentTile.getPosition();
+        for (int i = 1; i <= 8; i++) {
+            for (int move : moves) {
+                if (currentPosition + (move * i) == pos) {
+                    System.out.println("Valid");
+                    return true;
+                }
+
+            }
+        }
+        return false;
+    }
+
     public void handleTileClick(int pos) {
-        if (moving && currentTile != tiles.get(pos)) {
+        if (moving && currentTile != tiles.get(pos) && checkValidMove(pos)) {
             System.out.println("Tile Moved " + pos);
             tiles.get(pos).highlight();
             if (tiles.get(pos).getPiece() != null) {
@@ -127,6 +142,9 @@ public class Game extends Application {
             currentTile = tiles.get(pos);
         } else {
             System.out.println("No piece on " + pos);
+            if (currentTile != null) {
+                currentTile.unhighlight();
+            }
         }
     }
 

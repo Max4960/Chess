@@ -9,6 +9,7 @@ public class Bishop extends Piece{
     public Image image;
     public ImageView imageView;
     LinkedList<Piece> pieces;
+    private int[] validMoves = {-7, -9, 7, 9};
 
     public Bishop(int row, int col, boolean side, LinkedList<Piece> pieces) {
         this.row = row;
@@ -30,5 +31,9 @@ public class Bishop extends Piece{
 
     public Image getImage() {
         return image;
+    }
+
+    public int[] getValidMoves() {
+        return validMoves;
     }
 }

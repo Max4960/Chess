@@ -79,10 +79,13 @@ public class Tile extends Canvas {
     }
 
     public void unhighlight() {
-        System.out.println("Cleared: " + pos);
         var gc = getGraphicsContext2D();
         gc.clearRect(0,0, getWidth(), getHeight());
         paint();
         setPiece(piece);
+    }
+
+    public int getPosition() {
+        return pos;
     }
 }

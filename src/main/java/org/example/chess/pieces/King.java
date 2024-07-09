@@ -31,4 +31,8 @@ public class King extends Piece {
     public Image getImage() {
         return image;
     }
+
+    public int[] getValidMoves() {
+        return null;
+    }
 }
