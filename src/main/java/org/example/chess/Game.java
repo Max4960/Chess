@@ -104,8 +104,8 @@ public class Game extends Application {
     }
 
     public void handleTileClick(int pos) {
-        System.out.println("Tile clicked: " + pos);
         if (moving) {
+            System.out.println("Tile Moved " + pos);
             tiles.get(pos).highlight();
             if (tiles.get(pos).getPiece() != null) {
                 tiles.get(pos).setPiece(null);
@@ -115,7 +115,8 @@ public class Game extends Application {
             currentPiece = null;
             currentTile.setPiece(null);
             currentTile = tiles.get(pos);
-        } else if (tiles.get(pos) != null && tiles.get(pos).isOccupied()) {
+        } else if (tiles.get(pos).isOccupied()) {
+            System.out.println("Tile Clicked " + pos);
             if (currentTile != null) {
                 currentTile.unhighlight();
                 currentTile = null;
@@ -124,6 +125,8 @@ public class Game extends Application {
             moving = true;
             currentPiece = tiles.get(pos).getPiece();
             currentTile = tiles.get(pos);
+        } else {
+            System.out.println("No piece on " + pos);
         }
     }
 

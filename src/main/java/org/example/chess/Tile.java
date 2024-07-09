@@ -33,13 +33,14 @@ public class Tile extends Canvas {
     }
 
     public void setPiece(Piece piece) {
-        isOccupied = true;
         this.piece = piece;
         var gc = getGraphicsContext2D();
         if (piece != null) {
             gc.drawImage(piece.getImage(), 0, 0, 80, 80);
+            isOccupied = true;
         } else {
             paint();
+            isOccupied = false;
         }
 
     }
