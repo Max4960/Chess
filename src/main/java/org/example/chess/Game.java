@@ -104,7 +104,7 @@ public class Game extends Application {
     }
 
     public void handleTileClick(int pos) {
-        if (moving) {
+        if (moving && currentTile != tiles.get(pos)) {
             System.out.println("Tile Moved " + pos);
             tiles.get(pos).highlight();
             if (tiles.get(pos).getPiece() != null) {
