@@ -112,7 +112,7 @@ public class Game extends Application {
                 return true;
             }
             return false;
-        } else if (currentPiece instanceof Knight) {
+        } else if (currentPiece instanceof Knight || currentPiece instanceof King) {
             for (int move : moves) {
                 if (currentPosition + move == pos) {
                     return true;
