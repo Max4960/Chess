@@ -9,6 +9,7 @@ public class Pawn extends Piece {
     public Image image;
     public ImageView imageView;
     LinkedList<Piece> pieces;
+    private int[] validMoves;
 
     public Pawn(int row, int col, boolean side, LinkedList<Piece> pieces) {
         this.row = row;
@@ -26,6 +27,12 @@ public class Pawn extends Piece {
         imageView.setFitWidth(80);
 
         pieces.add(this);
+
+        if (isWhite) {
+            validMoves = new int[]{-8};
+        } else {
+            validMoves = new int[]{8};
+        }
     }
 
     public Image getImage() {
@@ -33,6 +40,6 @@ public class Pawn extends Piece {
     }
 
     public int[] getValidMoves() {
-        return null;
+        return validMoves;
     }
 }

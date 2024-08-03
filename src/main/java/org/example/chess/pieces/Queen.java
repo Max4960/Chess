@@ -9,6 +9,7 @@ public class Queen extends Piece {
     public Image image;
     public ImageView imageView;
     LinkedList<Piece> pieces;
+    private int[] validMoves = {-8, -1, 1, 8, -7, -9, 7, 9};
 
     public Queen(int row, int col, boolean side, LinkedList<Piece> pieces) {
         this.row = row;
@@ -33,7 +34,7 @@ public class Queen extends Piece {
     }
 
     public int[] getValidMoves() {
-        return null;
+        return validMoves;
     }
 
 }

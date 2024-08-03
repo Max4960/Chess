@@ -106,13 +106,27 @@ public class Game extends Application {
     private boolean checkValidMove(int pos) {
         int[] moves = currentPiece.getValidMoves();
         int currentPosition = currentTile.getPosition();
+
+        if (currentPiece instanceof Pawn) {
+            if (currentPosition + moves[0] == pos) {
+                return true;
+            }
+            return false;
+        } else if (currentPiece instanceof Knight) {
+            for (int move : moves) {
+                if (currentPosition + move == pos) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         for (int i = 1; i <= 8; i++) {
             for (int move : moves) {
                 if (currentPosition + (move * i) == pos) {
                     System.out.println("Valid");
                     return true;
                 }
-
             }
         }
         return false;
@@ -147,6 +161,4 @@ public class Game extends Application {
             }
         }
     }
-
-
 }
