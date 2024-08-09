@@ -10,6 +10,7 @@ public class Pawn extends Piece {
     public ImageView imageView;
     LinkedList<Piece> pieces;
     private int[] validMoves;
+    private boolean hasMoved = false;
 
     public Pawn(int row, int col, boolean side, LinkedList<Piece> pieces) {
         this.row = row;
@@ -29,14 +30,23 @@ public class Pawn extends Piece {
         pieces.add(this);
 
         if (isWhite) {
-            validMoves = new int[]{-8};
+            validMoves = new int[]{-8, -16};
         } else {
-            validMoves = new int[]{8};
+            validMoves = new int[]{8, 16};
         }
     }
 
     public Image getImage() {
         return image;
+    }
+
+    public void setMoved() {
+        this.hasMoved = true;
+        if (isWhite) {
+            validMoves = new int[]{-8};
+        } else {
+            validMoves = new int[]{8};
+        }
     }
 
     public int[] getValidMoves() {

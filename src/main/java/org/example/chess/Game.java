@@ -108,9 +108,13 @@ public class Game extends Application {
         int currentPosition = currentTile.getPosition();
 
         if (currentPiece instanceof Pawn) {
-            if (currentPosition + moves[0] == pos) {
-                return true;
+            for (int move : moves) {
+                if (currentPosition + move == pos) {
+                    ((Pawn) currentPiece).setMoved();
+                    return true;
+                }
             }
+
             return false;
         } else if (currentPiece instanceof Knight || currentPiece instanceof King) {
             for (int move : moves) {
@@ -134,6 +138,7 @@ public class Game extends Application {
 
     public void handleTileClick(int pos) {
         if (moving && currentTile != tiles.get(pos) && checkValidMove(pos)) {
+            System.out.println("IF STATEMENT 1");
             System.out.println("Tile Moved " + pos);
             tiles.get(pos).highlight();
             if (tiles.get(pos).getPiece() != null) {
@@ -145,6 +150,7 @@ public class Game extends Application {
             currentTile.setPiece(null);
             currentTile = tiles.get(pos);
         } else if (tiles.get(pos).isOccupied()) {
+            System.out.println("IF STATEMENT 2");
             System.out.println("Tile Clicked " + pos);
             if (currentTile != null) {
                 currentTile.unhighlight();
@@ -155,6 +161,7 @@ public class Game extends Application {
             currentPiece = tiles.get(pos).getPiece();
             currentTile = tiles.get(pos);
         } else {
+            System.out.println("IF STATEMENT 3");
             System.out.println("No piece on " + pos);
             if (currentTile != null) {
                 currentTile.unhighlight();
