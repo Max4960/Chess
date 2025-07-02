@@ -6,10 +6,12 @@ import java.util.List;
 public class Board {
     private final Piece[][] board;
     private Colour currentPlayer;
+    private int[] passant;
 
     public Board() {
         this.board = new Piece[8][8];
         currentPlayer = Colour.WHITE;
+        this.passant = null;
         setupBoard();
     }
 
@@ -22,6 +24,11 @@ public class Board {
                     this.board[r][c] = new Piece(originalPiece.getType(), originalPiece.getColour());
                 }
             }
+        }
+        if (original.passant != null) {
+            this.passant = new int[]{original.passant[0], original.passant[1]};
+        } else {
+            this.passant = null;
         }
         this.currentPlayer = original.currentPlayer;
     }
@@ -106,8 +113,13 @@ public class Board {
                     return true;
                 }
 
-                if (Math.abs(deltaCol) == 1 && deltaRow == forward && destinationPiece != null) {
-                    return true;
+                if (Math.abs(deltaCol) == 1 && deltaRow == forward) {
+                    if (destinationPiece != null) {
+                        return true; // regular capture
+                    }
+                    if (passant != null && endRow == passant[0] && endCol == passant[1]) {
+                        return true; // en passant
+                    }
                 }
                 return false;
             case ROOK:
@@ -145,8 +157,20 @@ public class Board {
 
     public void movePiece(int startRow, int startCol, int endRow, int endCol) {
         Piece piece = getPiece(startRow, startCol);
+        boolean isPassant = piece.getType() == PieceType.PAWN && passant != null && endRow == passant[0] && endCol == passant[1];
+        this.passant = null;
+
         board[endRow][endCol] = piece;
         board[startRow][startCol] = null;
+
+        if (isPassant) {
+            board[startRow][endRow] = null;
+        }
+
+        if (piece.getType() == PieceType.PAWN && Math.abs(startRow - endRow) == 2) {
+            int targetRow = (piece.getColour() == Colour.WHITE) ? startRow-1 : startRow+1;
+            this.passant = new int[]{targetRow, startCol};
+        }
     }
 
     private void setupBoard() {
